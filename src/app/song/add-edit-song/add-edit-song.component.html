@@ -1,0 +1,50 @@
+<form>
+    <div class="mb-3">
+        <label for="genreId" class="form-label">Genre</label>
+        <select class="form-control" name="genreId" [(ngModel)]="genreId" *ngIf="song.id!=0">
+            <option *ngFor="let type of genresList$|async" [value]="type.id">
+                {{type.name}}
+            </option>
+        </select>
+        <select class="form-control" name="genreId" id="genreId" [(ngModel)]="genreId" *ngIf="song.id==0">
+            <option *ngFor="let type of genresList$|async" [value]="type.id">
+                {{type.name}}
+            </option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Song Title</label>
+        <input type="text" class="form-control" [(ngModel)]="title" name="title">
+    </div>
+
+    <div class="mb-3">
+        <label for="artist" class="form-label">Artist</label>
+        <input type="text" class="form-control" [(ngModel)]="artist" name="artist">
+    </div>
+
+    <div class="mb-3">
+        <label for="title" class="form-label">URL</label>
+        <input type="text" class="form-control" [(ngModel)]="url" name="url">
+    </div>
+
+    <div class="mb-3">
+        <label for="rating" class="form-label">Rating (between 1 and 5)</label>
+        <input type="range" class="form-range" defaultValue="2" min="1" max="5" [(ngModel)]="rating" name="rating"
+            oninput="this.nextElementSibling.value = this.value">
+        <output id="stars">3</output>
+        <img src="assets/star.png" width="3%" style="position: relative; top: -2px;">
+    </div>
+
+    <div class="form-check mb-3">
+        <label for="isFavorite" class="form-check-label">Favorite</label>
+        <input type="checkbox" class="form-check-input" [checked]="isFavorite"  name="isFavorite" [(ngModel)]="isFavorite">
+    </div>
+
+    <button (click)="addSong()" *ngIf="song.id==0" class="btn btn-primary ">
+        Add
+    </button>
+    <button (click)="updateSong()" *ngIf="song.id!=0" class="btn btn-primary ">
+        Update
+    </button>
+</form>
