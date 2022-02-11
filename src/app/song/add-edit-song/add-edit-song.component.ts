@@ -29,7 +29,13 @@ export class AddEditSongComponent implements OnInit {
     this.artist = this.song.artist;
     this.url = this.song.url;
     this.rating = this.song.rating;
-    this.isFavorite = this.song.isFavorite;
+    if(this.song.isFavorite)
+    {
+      this.isFavorite = this.song.isFavorite;
+    }
+    else{
+      this.isFavorite = false;
+    }
     this.genreId = this.song.genreId;
     this.dateAdded = this.song.dateAdded;
     this.songList$ = this.service.getSongList();

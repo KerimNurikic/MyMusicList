@@ -47,7 +47,7 @@ export class ShowSongComponent implements OnInit {
       artist: null,
       url: null,
       rating: 3,
-      favorite: null,
+      isFavorite: null,
       dateAdded: null,
       dateEdited: null,
       genreId: null,
