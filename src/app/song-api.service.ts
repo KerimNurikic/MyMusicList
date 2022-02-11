@@ -28,6 +28,10 @@ export class SongApiService {
     return this.http.delete(this.songApiUrl + `/songs/${id}`);
   }
 
+  getSongsByTitle(title:string){
+    return this.http.get<any>(this.songApiUrl+`/songs/${title}/filter`);
+  }
+
   //Genres
 
   getGenresList(): Observable<any[]> {

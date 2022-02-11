@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SongApiService } from 'src/app/song-api.service';
 
@@ -19,6 +19,20 @@ export class ShowSongComponent implements OnInit {
   ngOnInit(): void {
     this.songList$ = this.service.getSongList();
     this.refreshGenresMap();
+  }
+
+  searchFilter:string='';
+  searchActive:boolean = false;
+
+  searchSongs() {
+    this.searchActive = true;
+    this.songList$ = this.service.getSongsByTitle(this.searchFilter);
+  }
+
+  cancelSearch(){
+    this.searchActive = false;
+    this.searchFilter="";
+    this.songList$ = this.service.getSongList();
   }
 
   //Variables
@@ -72,7 +86,12 @@ export class ShowSongComponent implements OnInit {
 
   modalClose() {
     this.activateAddEditSongComponent = false;
-    this.songList$ = this.service.getSongList();
+    if(!this.searchActive){
+      this.songList$ = this.service.getSongList();
+    } 
+    else {
+      this.songList$ = this.service.getSongsByTitle(this.searchFilter);
+    }
   }
 
   refreshGenresMap() {
