@@ -43,6 +43,8 @@ namespace MyMusic.Controllers
             return song;
         }
 
+        
+
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -101,6 +103,12 @@ namespace MyMusic.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+        [HttpGet("{title}/Filter")]
+        public async Task<ActionResult<IEnumerable<Song>>> GetSongs(string title)
+        {
+            return await _context.Songs.Where(s => s.Title.Contains(title)).ToListAsync();
+
         }
 
         private bool SongExists(int id)
